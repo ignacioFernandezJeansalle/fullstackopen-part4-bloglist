@@ -8,8 +8,8 @@ Continuamos nuestro trabajo en el backend. El tema principal es escribir pruebas
 
 ### Ejercicios
 
-- [ ] 4.1 => a: Estructura de la aplicación backend, introduccion a las pruebas
-- [ ] 4.2 => a: Estructura de la aplicación backend, introduccion a las pruebas
+- [x] 4.1 => a: Estructura de la aplicación backend, introduccion a las pruebas
+- [x] 4.2 => a: Estructura de la aplicación backend, introduccion a las pruebas
 - [ ] 4.3 => a: Estructura de la aplicación backend, introduccion a las pruebas
 - [ ] 4.4 => a: Estructura de la aplicación backend, introduccion a las pruebas
 - [ ] 4.5 => a: Estructura de la aplicación backend, introduccion a las pruebas
