@@ -12,7 +12,7 @@ Continuamos nuestro trabajo en el backend. El tema principal es escribir pruebas
 - [x] 4.2 => a: Estructura de la aplicación backend, introduccion a las pruebas
 - [x] 4.3 => a: Estructura de la aplicación backend, introduccion a las pruebas
 - [x] 4.4 => a: Estructura de la aplicación backend, introduccion a las pruebas
-- [ ] 4.5 => a: Estructura de la aplicación backend, introduccion a las pruebas
+- [x] 4.5 => a: Estructura de la aplicación backend, introduccion a las pruebas
 - [ ] 4.6 => a: Estructura de la aplicación backend, introduccion a las pruebas
 - [ ] 4.7 => a: Estructura de la aplicación backend, introduccion a las pruebas
 - [ ] 4.8 => b: Probando el backend
