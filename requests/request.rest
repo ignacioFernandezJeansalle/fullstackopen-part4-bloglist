@@ -10,3 +10,6 @@ content-type: application/json
   "url": "url",
   "likes": 11
 }
+
+### Unknow endpoint
+GET http://localhost:3003/api
