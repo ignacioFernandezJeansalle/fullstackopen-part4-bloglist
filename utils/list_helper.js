@@ -16,7 +16,8 @@ const favoriteBlog = (blogs) => {
   return blogs.length === 0 ? { message: "Empty blogs" } : blogs.reduce(reducer, {});
 };
 
-const mostBlogs = (blogs) => {
+// without lodash library
+/* const mostBlogs = (blogs) => {
   if (blogs.length === 0) return { message: "Empty blogs" };
 
   const blogsByAuthor = blogs.reduce((result, blog) => {
@@ -31,6 +32,23 @@ const mostBlogs = (blogs) => {
   for (const [author, blogs] of Object.entries(blogsByAuthor)) {
     mostBlogs = mostBlogs.blogs < blogs ? { author, blogs } : mostBlogs;
   }
+
+  return mostBlogs;
+}; */
+
+// with lodash library
+const lodash = require("lodash");
+const mostBlogs = (blogs) => {
+  if (blogs.length === 0) return { message: "Empty blogs" };
+
+  const blogsByAuthor = lodash.countBy(blogs, "author");
+
+  const reducerMostBlogs = (result, value, key) => {
+    if (result.blogs < value) result = { author: key, blogs: value };
+    return result;
+  };
+
+  const mostBlogs = lodash.reduce(blogsByAuthor, reducerMostBlogs, { blogs: 0 });
 
   return mostBlogs;
 };
