@@ -10,11 +10,7 @@ const api = supertest(app);
 
 beforeEach(async () => {
   await Blog.deleteMany({});
-
-  for (let blog of helpers.initialTestBlogs) {
-    const newBlog = new Blog(blog);
-    await newBlog.save();
-  }
+  await Blog.insertMany(helpers.initialTestBlogs);
 });
 
 describe("API Blogs", () => {
@@ -28,6 +24,12 @@ describe("API Blogs", () => {
   test("all blogs are returned", async () => {
     const response = await api.get("/api/blogs");
     assert.strictEqual(response.body.length, helpers.initialTestBlogs.length);
+  });
+
+  test("identifier property is named id", async () => {
+    await api.get("/api/blogs").expect((res) => {
+      if (!res.body[0].id) throw new Error("missing id key");
+    });
   });
 });
 
