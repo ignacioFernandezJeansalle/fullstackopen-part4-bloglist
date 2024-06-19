@@ -46,8 +46,8 @@ describe("Addition of a new blog", () => {
         assert.strictEqual(response.body.title, helpers.newBlog.title);
       });
 
-    const response = await api.get("/api/blogs");
-    assert.strictEqual(response.body.length, helpers.initialTestBlogs.length + 1);
+    const blogsInDb = await helpers.blogsInDb();
+    assert.strictEqual(blogsInDb.length, helpers.initialTestBlogs.length + 1);
   });
 
   test("without the likes property then likes equals 0", async () => {
@@ -70,10 +70,8 @@ describe("Addition of a new blog", () => {
 
 describe("Deletion of a blog", () => {
   test("succeeds with status code 200 if id is valid", async () => {
-    const response = await api.get("/api/blogs");
-
-    const totalBlogs = response.body.length;
-    const blogToDelete = response.body[0];
+    const blogsInDbBeforeDelete = await helpers.blogsInDb();
+    const blogToDelete = blogsInDbBeforeDelete[0];
 
     await api
       .delete(`/api/blogs/${blogToDelete.id}`)
@@ -82,18 +80,16 @@ describe("Deletion of a blog", () => {
         assert.deepStrictEqual(response.body, blogToDelete);
       });
 
-    await api.get("/api/blogs").expect((response) => {
-      assert.strictEqual(response.body.length, totalBlogs - 1);
-    });
+    const blogsInDbAfterDelete = await helpers.blogsInDb();
+    assert.strictEqual(blogsInDbBeforeDelete.length - 1, blogsInDbAfterDelete.length);
   });
 });
 
 describe("Updating of a blog", () => {
   test("succeeds with status code 200 updating likes + 1", async () => {
-    const response = await api.get("/api/blogs");
+    const blogsInDb = await helpers.blogsInDb();
 
-    const blogToUpdate = response.body[0];
-    const lokesOfBlogToUpdate = blogToUpdate.likes;
+    const blogToUpdate = blogsInDb[0];
     blogToUpdate.likes = blogToUpdate.likes + 1;
 
     await api
@@ -101,7 +97,7 @@ describe("Updating of a blog", () => {
       .send(blogToUpdate)
       .expect(200)
       .expect((response) => {
-        assert.deepStrictEqual(response.body.likes, lokesOfBlogToUpdate + 1);
+        assert.deepStrictEqual(response.body.likes, blogToUpdate.likes);
       });
   });
 });
