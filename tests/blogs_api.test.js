@@ -8,12 +8,14 @@ const app = require("../app");
 
 const api = supertest(app);
 
-beforeEach(async () => {
-  await Blog.deleteMany({});
-  await Blog.insertMany(helpers.initialTestBlogs);
-});
+describe("When there is initially some blogs saved", () => {
+  beforeEach(async () => {
+    await Blog.deleteMany({});
+    //console.log("DB Test cleared");
+    await Blog.insertMany(helpers.initialTestBlogs);
+    //console.log("DB initial test blogs saved");
+  });
 
-describe("API Blogs", () => {
   test("blogs are returned as json", async () => {
     await api
       .get("/api/blogs")
@@ -45,6 +47,17 @@ describe("API Blogs", () => {
 
       const contents = response.body.map((blog) => blog.title);
       assert(contents.includes(helpers.newBlog.title));
+    });
+
+    test("without the likes property then likes equals 0", async () => {
+      await api
+        .post("/api/blogs")
+        .send(helpers.newBlogWithoutLikes)
+        .expect(201)
+        .expect("Content-Type", /application\/json/)
+        .expect((response) => {
+          assert.strictEqual(response.body.likes, 0);
+        });
     });
   });
 });
