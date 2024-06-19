@@ -31,6 +31,22 @@ describe("API Blogs", () => {
       if (!res.body[0].id) throw new Error("missing id key");
     });
   });
+
+  describe("addition of a new blog", () => {
+    test("succeeds with valid data", async () => {
+      await api
+        .post("/api/blogs")
+        .send(helpers.newBlog)
+        .expect(201)
+        .expect("Content-Type", /application\/json/);
+
+      const response = await api.get("/api/blogs");
+      assert.strictEqual(response.body.length, helpers.initialTestBlogs.length + 1);
+
+      const contents = response.body.map((blog) => blog.title);
+      assert(contents.includes(helpers.newBlog.title));
+    });
+  });
 });
 
 after(async () => {
