@@ -26,4 +26,22 @@ const newBlogWithoutLikes = {
   url: "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll",
 };
 
-module.exports = { initialTestBlogs, newBlog, newBlogWithoutLikes };
+const newBlogWithoutTitle = {
+  author: "Edsger W. Dijkstra",
+  url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
+  likes: 12,
+};
+
+const newBlogWithoutUrl = {
+  title: "Canonical string reduction",
+  author: "Edsger W. Dijkstra",
+  likes: 12,
+};
+
+module.exports = {
+  initialTestBlogs,
+  newBlog,
+  newBlogWithoutLikes,
+  newBlogWithoutTitle,
+  newBlogWithoutUrl,
+};
