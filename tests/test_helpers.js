@@ -20,4 +20,10 @@ const newBlog = {
   likes: 12,
 };
 
-module.exports = { initialTestBlogs, newBlog };
+const newBlogWithoutLikes = {
+  title: "First class tests",
+  author: "Robert C. Martin",
+  url: "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll",
+};
+
+module.exports = { initialTestBlogs, newBlog, newBlogWithoutLikes };
