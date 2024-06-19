@@ -33,37 +33,57 @@ describe("When there is initially some blogs saved", () => {
       if (!res.body[0].id) throw new Error("missing id key");
     });
   });
+});
 
-  describe("addition of a new blog", () => {
-    test("succeeds with valid data", async () => {
-      await api
-        .post("/api/blogs")
-        .send(helpers.newBlog)
-        .expect(201)
-        .expect("Content-Type", /application\/json/)
-        .expect((response) => {
-          assert.strictEqual(response.body.title, helpers.newBlog.title);
-        });
+describe("Addition of a new blog", () => {
+  test("succeeds with valid data", async () => {
+    await api
+      .post("/api/blogs")
+      .send(helpers.newBlog)
+      .expect(201)
+      .expect("Content-Type", /application\/json/)
+      .expect((response) => {
+        assert.strictEqual(response.body.title, helpers.newBlog.title);
+      });
 
-      const response = await api.get("/api/blogs");
-      assert.strictEqual(response.body.length, helpers.initialTestBlogs.length + 1);
-    });
+    const response = await api.get("/api/blogs");
+    assert.strictEqual(response.body.length, helpers.initialTestBlogs.length + 1);
+  });
 
-    test("without the likes property then likes equals 0", async () => {
-      await api
-        .post("/api/blogs")
-        .send(helpers.newBlogWithoutLikes)
-        .expect(201)
-        .expect("Content-Type", /application\/json/)
-        .expect((response) => {
-          assert.strictEqual(response.body.likes, 0);
-        });
-    });
+  test("without the likes property then likes equals 0", async () => {
+    await api
+      .post("/api/blogs")
+      .send(helpers.newBlogWithoutLikes)
+      .expect(201)
+      .expect("Content-Type", /application\/json/)
+      .expect((response) => {
+        assert.strictEqual(response.body.likes, 0);
+      });
+  });
 
-    test("bad request 400 without title or url property", async () => {
-      await api.post("/api/blogs").send(helpers.newBlogWithoutTitle).expect(400);
+  test("bad request 400 without title or url property", async () => {
+    await api.post("/api/blogs").send(helpers.newBlogWithoutTitle).expect(400);
 
-      await api.post("/api/blogs").send(helpers.newBlogWithoutUrl).expect(400);
+    await api.post("/api/blogs").send(helpers.newBlogWithoutUrl).expect(400);
+  });
+});
+
+describe("Deletion of a blog", () => {
+  test("succeeds with status code 200 if id is valid", async () => {
+    const response = await api.get("/api/blogs");
+
+    const totalBlogs = response.body.length;
+    const blogToDelete = response.body[0];
+
+    await api
+      .delete(`/api/blogs/${blogToDelete.id}`)
+      .expect(200)
+      .expect((response) => {
+        assert.deepStrictEqual(response.body, blogToDelete);
+      });
+
+    await api.get("/api/blogs").expect((response) => {
+      assert.strictEqual(response.body.length, totalBlogs - 1);
     });
   });
 });
