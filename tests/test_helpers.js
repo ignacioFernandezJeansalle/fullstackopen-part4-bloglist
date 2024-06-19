@@ -13,4 +13,11 @@ const initialTestBlogs = [
   },
 ];
 
-module.exports = { initialTestBlogs };
+const newBlog = {
+  title: "Canonical string reduction",
+  author: "Edsger W. Dijkstra",
+  url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
+  likes: 12,
+};
+
+module.exports = { initialTestBlogs, newBlog };
