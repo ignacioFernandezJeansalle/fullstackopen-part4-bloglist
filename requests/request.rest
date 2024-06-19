@@ -16,3 +16,11 @@ GET http://localhost:3003/api
 
 ### Delete
 DELETE http://localhost:3003/api/blogs/6669fdd2f79ccc3236295f51
+
+### update likes
+PUT http://localhost:3003/api/blogs/6669fde0f79ccc3236295f53 HTTP/1.1
+content-type: application/json
+
+{
+  "likes": 999
+}
