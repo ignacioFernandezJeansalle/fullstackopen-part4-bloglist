@@ -88,6 +88,24 @@ describe("Deletion of a blog", () => {
   });
 });
 
+describe("Updating of a blog", () => {
+  test("succeeds with status code 200 updating likes + 1", async () => {
+    const response = await api.get("/api/blogs");
+
+    const blogToUpdate = response.body[0];
+    const lokesOfBlogToUpdate = blogToUpdate.likes;
+    blogToUpdate.likes = blogToUpdate.likes + 1;
+
+    await api
+      .put(`/api/blogs/${blogToUpdate.id}`)
+      .send(blogToUpdate)
+      .expect(200)
+      .expect((response) => {
+        assert.deepStrictEqual(response.body.likes, lokesOfBlogToUpdate + 1);
+      });
+  });
+});
+
 after(async () => {
   await mongoose.connection.close();
 });
