@@ -1,6 +1,6 @@
 GET http://localhost:3003/api/blogs
 
-###
+### 
 POST http://localhost:3003/api/blogs HTTP/1.1
 content-type: application/json
 
@@ -13,3 +13,6 @@ content-type: application/json
 
 ### Unknow endpoint
 GET http://localhost:3003/api
+
+### Delete
+DELETE http://localhost:3003/api/blogs/6669fdd2f79ccc3236295f51
