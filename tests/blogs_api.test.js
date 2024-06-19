@@ -59,6 +59,12 @@ describe("When there is initially some blogs saved", () => {
           assert.strictEqual(response.body.likes, 0);
         });
     });
+
+    test("bad request 400 without title or url property", async () => {
+      await api.post("/api/blogs").send(helpers.newBlogWithoutTitle).expect(400);
+
+      await api.post("/api/blogs").send(helpers.newBlogWithoutUrl).expect(400);
+    });
   });
 });
 
