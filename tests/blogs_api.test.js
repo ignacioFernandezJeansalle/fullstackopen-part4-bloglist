@@ -40,13 +40,13 @@ describe("When there is initially some blogs saved", () => {
         .post("/api/blogs")
         .send(helpers.newBlog)
         .expect(201)
-        .expect("Content-Type", /application\/json/);
+        .expect("Content-Type", /application\/json/)
+        .expect((response) => {
+          assert.strictEqual(response.body.title, helpers.newBlog.title);
+        });
 
       const response = await api.get("/api/blogs");
       assert.strictEqual(response.body.length, helpers.initialTestBlogs.length + 1);
-
-      const contents = response.body.map((blog) => blog.title);
-      assert(contents.includes(helpers.newBlog.title));
     });
 
     test("without the likes property then likes equals 0", async () => {
