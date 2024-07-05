@@ -24,3 +24,17 @@ content-type: application/json
 {
   "likes": 999
 }
+
+
+### 
+GET http://localhost:3003/api/users
+
+### 
+POST http://localhost:3003/api/users HTTP/1.1
+content-type: application/json
+
+{
+  "username": "nachofj",
+  "password": "nachitoPass",
+  "name": "Ignacio Fernández 2"
+}
