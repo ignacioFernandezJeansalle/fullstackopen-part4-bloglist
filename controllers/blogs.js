@@ -1,7 +1,7 @@
-const blogRouter = require("express").Router();
+const blogsRouter = require("express").Router();
 const Blog = require("../models/blog");
 
-blogRouter
+blogsRouter
   .route("/")
   .get(async (request, response, next) => {
     try {
@@ -26,7 +26,7 @@ blogRouter
     }
   });
 
-blogRouter
+blogsRouter
   .route("/:id")
   .put(async (request, response, next) => {
     const { id } = request.params;
@@ -50,4 +50,4 @@ blogRouter
     }
   });
 
-module.exports = blogRouter;
+module.exports = blogsRouter;
