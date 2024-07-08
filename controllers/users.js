@@ -16,6 +16,20 @@ usersRouter
     const { username, password, name } = request.body;
 
     try {
+      if (!password) {
+        const newError = new Error("User validation failed: `password` is required.");
+        newError.name = "ValidationError";
+        throw newError;
+      }
+
+      if (password.length < 3) {
+        const newError = new Error(
+          "User validation failed: password: Path `password` is shorter than the minimum allowed length (3)"
+        );
+        newError.name = "ValidationError";
+        throw newError;
+      }
+
       const salt = 10;
       const passwordHash = await bcrypt.hash(password, salt);
 
