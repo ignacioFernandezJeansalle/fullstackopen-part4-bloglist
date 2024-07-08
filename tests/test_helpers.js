@@ -45,6 +45,19 @@ const newBlogWithoutUrl = {
   likes: 12,
 };
 
+const User = require("../models/user");
+
+const usersInDb = async () => {
+  const users = await User.find({});
+  return users.map((user) => user.toJSON());
+};
+
+const newUser = {
+  username: "nachitofj",
+  password: "passNachitofj",
+  name: "Ignacio Fernández",
+};
+
 module.exports = {
   blogsInDb,
   initialTestBlogs,
@@ -52,4 +65,6 @@ module.exports = {
   newBlogWithoutLikes,
   newBlogWithoutTitle,
   newBlogWithoutUrl,
+  usersInDb,
+  newUser,
 };
