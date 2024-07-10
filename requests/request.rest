@@ -5,7 +5,7 @@ POST http://localhost:3003/api/blogs HTTP/1.1
 content-type: application/json
 
 {
-  "title": "Titulo",
+  "title": "Titulo 2",
   "author": "Autor",
   "url": "url",
   "likes": 11
@@ -35,6 +35,6 @@ content-type: application/json
 
 {
   "username": "nachitofj",
-  "password": "pa",
+  "password": "passwordNachitofj",
   "name": "Ignacio Fernández"
 }
