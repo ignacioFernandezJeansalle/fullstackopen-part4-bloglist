@@ -38,3 +38,12 @@ content-type: application/json
   "password": "passwordNachitofj",
   "name": "Ignacio Fernández"
 }
+
+###
+POST http://localhost:3003/api/login HTTP/1.1
+content-type: application/json
+
+{
+  "username": "nachitofj",
+  "password": "passwordNachitofj"
+}
