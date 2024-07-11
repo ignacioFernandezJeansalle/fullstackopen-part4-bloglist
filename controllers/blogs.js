@@ -1,7 +1,6 @@
-const jwt = require("jsonwebtoken");
 const blogsRouter = require("express").Router();
 const Blog = require("../models/blog");
-const User = require("../models/user");
+const middleware = require("../utils/middleware");
 
 blogsRouter
   .route("/")
@@ -13,18 +12,13 @@ blogsRouter
       next(error);
     }
   })
-  .post(async (request, response, next) => {
+  .post(middleware.userExtractor, async (request, response, next) => {
     const { body } = request;
 
     if (!body.title || !body.url) return response.status(400).end();
 
     try {
-      const decodedToken = jwt.verify(request.token, process.env.SECRET);
-      if (!decodedToken.id) {
-        return response.status(401).json({ error: "token invalid" });
-      }
-
-      const user = await User.findById(decodedToken.id);
+      const user = request.user;
 
       const blog = new Blog({
         title: body.title,
@@ -57,15 +51,11 @@ blogsRouter
       next(error);
     }
   })
-  .delete(async (request, response, next) => {
+  .delete(middleware.userExtractor, async (request, response, next) => {
     const { id } = request.params;
 
     try {
-      const decodedToken = jwt.verify(request.token, process.env.SECRET);
-
-      if (!decodedToken.id) return response.status(401).json({ error: "token invalid" });
-
-      const user = await User.findById(decodedToken.id);
+      const user = request.user;
       const blog = await Blog.findById(id);
 
       if (user._id.toString() !== blog.user.toString()) return response.status(401).json({ error: "user invalid" });
