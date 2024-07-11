@@ -27,7 +27,7 @@ Continuamos nuestro trabajo en el backend. El tema principal es escribir pruebas
 - [x] 4.17 => d: Autenticación basada en token
 - [x] 4.18 => d: Autenticación basada en token
 - [x] 4.19 => d: Autenticación basada en token
-- [ ] 4.20 => d: Autenticación basada en token
+- [x] 4.20 => d: Autenticación basada en token
 - [ ] 4.21 => d: Autenticación basada en token
 - [ ] 4.22 => d: Autenticación basada en token
 - [ ] 4.23 => d: Autenticación basada en token
