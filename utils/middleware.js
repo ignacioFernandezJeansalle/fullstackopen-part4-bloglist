@@ -9,8 +9,19 @@ const requestLogger = (req, res, next) => {
   next();
 };
 
-const unknownEndpoint = (req, res) => {
+const unknownEndpoint = (req, res, next) => {
   res.status(404).send({ error: "Unknown endpoint" });
+  next();
+};
+
+const tokenExtractor = (req, res, next) => {
+  const authorization = req.get("authorization");
+
+  if (authorization && authorization.startsWith("Bearer ")) {
+    req.token = authorization.replace("Bearer ", "");
+  }
+
+  next();
 };
 
 const errorHandler = (error, req, res, next) => {
@@ -25,11 +36,13 @@ const errorHandler = (error, req, res, next) => {
     return res.status(400).json({ error: "Expected username to be unique" });
 
   if (error.name === "JsonWebTokenError") return res.status(401).json({ error: "token invalid" });
+
   next(error);
 };
 
 module.exports = {
   requestLogger,
   unknownEndpoint,
+  tokenExtractor,
   errorHandler,
 };
