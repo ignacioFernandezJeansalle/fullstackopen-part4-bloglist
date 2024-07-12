@@ -1,3 +1,4 @@
+const bcrypt = require("bcryptjs");
 const Blog = require("../models/blog");
 
 const blogsInDb = async () => {
@@ -47,15 +48,35 @@ const newBlogWithoutUrl = {
 
 const User = require("../models/user");
 
-const usersInDb = async () => {
-  const users = await User.find({});
-  return users.map((user) => user.toJSON());
+const userRoot = {
+  username: "root",
+  password: "secret",
+  name: "Name Root",
 };
 
 const newUser = {
   username: "nachitofj",
   password: "passNachitofj",
   name: "Ignacio Fernández",
+};
+
+const usersInDb = async () => {
+  const users = await User.find({});
+  return users.map((user) => user.toJSON());
+};
+
+const clearAndCreateUserRoot = async () => {
+  await User.deleteMany({});
+
+  const passwordHash = await bcrypt.hash(userRoot.password, 10);
+
+  const newUser = new User({
+    username: userRoot.username,
+    passwordHash,
+    name: userRoot.name,
+  });
+
+  await newUser.save();
 };
 
 module.exports = {
@@ -65,6 +86,8 @@ module.exports = {
   newBlogWithoutLikes,
   newBlogWithoutTitle,
   newBlogWithoutUrl,
-  usersInDb,
+  userRoot,
   newUser,
+  usersInDb,
+  clearAndCreateUserRoot,
 };
