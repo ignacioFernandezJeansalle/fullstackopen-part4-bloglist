@@ -3,10 +3,10 @@ GET http://localhost:3003/api/blogs
 ### 
 POST http://localhost:3003/api/blogs HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5hY2hpdG9maiIsImlkIjoiNjY4ZWMzNzM2ODQ5MWM3NmEzYjZhZjJhIiwiaWF0IjoxNzIwNzA0MTEzfQ.M3m86YiyCN9pjR6joXGvNS8PVJRSICB7UgZAHWBSchM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5hY2hpdG9majIiLCJpZCI6IjY2OGZlNzZiNmYzYTRiZGFjMzg1NWRhNCIsImlhdCI6MTcyMDcxOTAyNn0.GoLlZQaRq11sHBnbcz3jHuoIKoE_0EgNcQSvxjHwjN8
 
 {
-  "title": "Titulo con token 2",
+  "title": "Titulo con token 4",
   "author": "Autor",
   "url": "url",
   "likes": 11
@@ -16,7 +16,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5hY
 GET http://localhost:3003/api
 
 ### Delete
-DELETE http://localhost:3003/api/blogs/6669fdd2f79ccc3236295f51
+DELETE http://localhost:3003/api/blogs/669017746c026f3ca54be8a0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5hY2hpdG9maiIsImlkIjoiNjY4ZWMzNzM2ODQ5MWM3NmEzYjZhZjJhIiwiaWF0IjoxNzIwNzE5Mzk5fQ.X2PT4Ts4KhLmBkeFgQue6enx9LVryGnIWK60aoxwgiU
 
 ### update likes
 PUT http://localhost:3003/api/blogs/6669fde0f79ccc3236295f53 HTTP/1.1
@@ -35,9 +36,9 @@ POST http://localhost:3003/api/users HTTP/1.1
 content-type: application/json
 
 {
-  "username": "nachitofj",
-  "password": "passwordNachitofj",
-  "name": "Ignacio Fernández"
+  "username": "nachitofj2",
+  "password": "passwordNachitofj2",
+  "name": "Ignacio Fernández 2"
 }
 
 ###
