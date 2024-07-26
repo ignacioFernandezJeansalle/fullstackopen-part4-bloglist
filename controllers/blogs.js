@@ -40,6 +40,16 @@ blogsRouter
 
 blogsRouter
   .route("/:id")
+  .get(async (request, response, next) => {
+    const { id } = request.params;
+
+    try {
+      const blog = await Blog.findById(id).populate("user", { username: 1, name: 1 });
+      response.json(blog);
+    } catch (error) {
+      next(error);
+    }
+  })
   .put(middleware.userExtractor, async (request, response, next) => {
     const { id } = request.params;
     const { likes } = request.body;
